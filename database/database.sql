@@ -6,8 +6,7 @@
 -- psql -U postgres -d arena_db -f database.sql
 
 
-
--- 1. PEMBUATAN TABEL (TANPA FOREIGN KEY) =========================================================
+-- 1. PEMBUATAN TABEL (TANPA FOREIGN KEY) ===================================================
 
 CREATE TABLE public.gedung_fasilitas (
     id_gedung uuid NOT NULL,
