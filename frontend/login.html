@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Masuk - ARENA</title>
+
+    <!-- Font Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS Login -->
+    <link rel="stylesheet" href="assets/css/pages/login.css">
+</head>
+
+<body class="login-page">
+
+    <main class="card">
+
+        <!-- PANEL KIRI -->
+        <section class="hero">
+
+            <div class="brand">
+                <span class="brand-mark">A</span>
+
+                <div class="brand-text">
+                    <span class="brand-name">ARENA</span>
+                    <span class="brand-sub">Student Portal</span>
+                </div>
+            </div>
+
+            <div class="hero-copy">
+                <blockquote class="hero-quote">
+                    “Satu pintu untuk setiap pengajuan kegiatan - dari proposal sampai persetujuan.”
+                </blockquote>
+
+                <p class="hero-note">
+                    Kelola aktivitas organisasi kampus dengan alur yang lebih jelas, cepat, dan transparan.
+                </p>
+            </div>
+
+        </section>
+
+        <!-- PANEL KANAN -->
+        <section class="panel">
+
+            <form class="form" id="loginForm">
+
+                <p class="eyebrow">SELAMAT DATANG KEMBALI</p>
+
+                <h1 class="title">Masuk ke Akun Kamu</h1>
+
+                <div class="field">
+                    <label for="email">Alamat email</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Masukkan email anda"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <div class="field">
+                    <label for="password">Kata sandi</label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Masukkan kata sandi anda"
+                        autocomplete="current-password"
+                        required
+                    >
+                </div>
+
+                <p id="loginError" style="color:#ff6b81;font-size:13px;margin-bottom:8px;min-height:18px;"></p>
+
+                <button class="btn" type="submit" id="btnMasuk">
+                    Masuk &gt;
+                </button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <script src="assets/js/auth.js"></script>
+    <script>
+        const form = document.getElementById("loginForm");
+        const btn = document.getElementById("btnMasuk");
+        const errorBox = document.getElementById("loginError");
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            errorBox.textContent = "";
+            btn.disabled = true;
+            btn.textContent = "Memproses...";
+
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            Auth.login(email, password)
+                .then(function (user) {
+                    window.location.href = user.roleMeta.home;
+                })
+                .catch(function (err) {
+                    errorBox.textContent = err.message;
+                    btn.disabled = false;
+                    btn.innerHTML = "Masuk &gt;";
+                });
+        });
+    </script>
+
+</body>
+</html>

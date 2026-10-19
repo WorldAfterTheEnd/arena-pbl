@@ -1,0 +1,11 @@
+/* mahasiswa.css - gaya khusus wizard pengajuan */
+.template-box { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 26px 24px; border-radius: 14px; background: linear-gradient(90deg, #1b1f4a, #2c2a6a 60%, #2b2f55); border: 1px solid var(--line); }
+.template-box h2 { font-size: 22px; } .template-box p { margin: 6px 0 0; color: #cfd1ea; }
+.lbl { font-weight: 600; font-size: 13px; margin: 0 0 10px; }
+.hint { color: var(--muted); font-size: 12px; margin: 0; }
+.hint.bad { color: #ff6b81; } .hint.ok { color: var(--ok); }
+.confirm-box { background: var(--field); border: 1px solid #3a3e52; border-radius: 14px; padding: 14px 16px; line-height: 1.7; }
+.confirm-box dl { display: grid; grid-template-columns: 150px 1fr; gap: 2px 12px; margin: 10px 0 0; font-size: 12px; }
+.confirm-box dt { color: var(--muted); } .confirm-box dd { margin: 0; }
+#dd-tempat .dropdown, #dd-tempat .dropdown-btn { width: 100%; }
+#dd-tempat .dropdown-btn { background: var(--field); border-color: #3a3e52; border-radius: 14px; padding: 12px 14px; }

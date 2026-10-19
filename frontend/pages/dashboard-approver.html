@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Approver - ARENA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/variables.css">
+  <link rel="stylesheet" href="../assets/css/global.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/pages/main.css">
+  <link rel="stylesheet" href="../assets/css/pages/dasboard-approver.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Menu: Dashboard -->
+    <section class="view" data-view="dashboard">
+      <div class="grid cols-2">
+        <div class="card stat"><div class="label">Pengajuan Masuk Hari ini</div><div class="value" id="st-masuk">0</div></div>
+        <div class="card stat"><div class="label">Menunggu Tinjauan</div><div class="value" id="st-tunggu">0</div></div>
+      </div>
+      <h2 class="section-title">Daftar Pengajuan Menunggu Tinjauan</h2>
+      <div id="list-dashboard"></div>
+      <h2 class="section-title">Riwayat &amp; Statistik</h2>
+      <div class="grid cols-3" id="stat-riwayat"></div>
+    </section>
+    <!-- Menu: Antrean Persetujuan -->
+    <section class="view" data-view="antrean">
+      <h2 class="section-title" style="margin-top:0">Daftar Pengajuan Menunggu Tinjauan</h2>
+      <div id="list-antrean"></div>
+    </section>
+    <!-- Menu: Arsip Kegiatan -->
+    <section class="view" data-view="arsip">
+      <h2 class="section-title" style="margin-top:0">Riwayat</h2>
+      <div class="grid cols-3" id="stat-arsip"></div>
+      <div class="card" style="margin-top:14px"><table class="table" id="tbl-arsip"></table></div>
+    </section>
+
+    <!-- Modal: lihat PDF (frame "lihat pdf") -->
+    <div class="overlay" id="m-pdf"><div class="modal">
+      <h2 id="pdf-title">Proposal</h2>
+      <div class="preview">[ Pratinjau PDF proposal - tempat embed &lt;iframe&gt;/pdf.js ]</div>
+      <div class="actions"><button class="btn" onclick="UI.modal.close('m-pdf')">Selesai lihat</button></div>
+    </div></div>
+
+    <!-- Modal: tinjau proposal (frame "tinjau proposal") -->
+    <div class="overlay" id="m-review"><div class="modal">
+      <h2 id="rv-title">Tinjau Proposal</h2>
+      <div class="preview">[ Pratinjau proposal ]</div>
+      <div class="field"><label>Masukkan catatan</label><textarea class="textarea" id="rv-note" placeholder="Catatan wajib diisi untuk Revisi / Ditolak"></textarea></div>
+      <div class="actions">
+        <button class="btn btn-ghost" onclick="UI.modal.close('m-review')">Batal</button>
+        <button class="btn" data-act="Direvisi">Revisi</button>
+        <button class="btn" data-act="Disetujui">Disetujui</button>
+        <button class="btn" data-act="Ditolak">Ditolak</button>
+      </div>
+    </div></div>
+  </div>
+
+  <script src="../assets/js/auth.js"></script>
+  <script src="../assets/js/ui.js"></script>
+  <script src="../assets/js/shell.js"></script>
+  <script src="../assets/js/data.js"></script>
+  <script src="../assets/js/dasboard-approver.js"></script>
+</body>
+</html>
