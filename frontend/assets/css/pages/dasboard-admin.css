@@ -1,0 +1,9 @@
+/* Styling khusus Dashboard Admin TU */
+.stats-grid .stat-box {
+  transition: transform 0.2s ease;
+}
+
+.stats-grid .stat-box:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}

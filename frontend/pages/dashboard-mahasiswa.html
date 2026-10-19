@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ajukan Peminjaman - ARENA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/variables.css">
+  <link rel="stylesheet" href="../assets/css/global.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/pages/main.css">
+  <link rel="stylesheet" href="../assets/css/pages/dashboard-mahasiswa.css">
+</head>
+<body>
+  <!-- #app diisi sidebar+header oleh shell.js; isi di bawah ini = konten halaman -->
+  <div id="app">
+    <section class="view" data-view="ajukan">
+
+      <!-- STEPPER 5 LANGKAH (dibuat oleh dasboard-mahasiswa.js agar mudah diubah) -->
+      <div class="stepper" id="stepper"></div>
+
+      <div class="card" id="wizard">
+        <!-- LANGKAH 1: Unduh templat (muncul sesuai role BEM/HMJ/UKM) -->
+        <div class="step-panel" data-step="1">
+          <div class="template-box">
+            <div><h2 id="tpl-title">Template Proposal Peminjaman Tempat</h2>
+              <p>Unduh template nya dan sesuaikan dengan kegiatan mu</p></div>
+            <button class="btn" id="btn-unduh">Unduh Docx.</button>
+          </div>
+        </div>
+
+        <!-- LANGKAH 2: Data kegiatan -->
+        <div class="step-panel" data-step="2">
+          <div class="field"><label>Nama Kegiatan</label><input class="input" id="f-nama" placeholder="Dies Natalis Jurusan Teknologi Informasi"></div>
+          <div class="grid cols-2">
+            <div class="field"><label>Organisasi Pelaksana</label><input class="input" id="f-org" readonly></div>
+            <div class="field"><label>Perkiraan Peserta</label><input class="input" id="f-peserta" type="number" min="1" placeholder="100"></div>
+          </div>
+          <div class="field"><label>Deskripsi Kegiatan</label><textarea class="textarea" id="f-desk" placeholder="Jelaskan tujuan & rangkaian acara..."></textarea></div>
+        </div>
+
+        <!-- LANGKAH 3: Ruang & jadwal -->
+        <div class="step-panel" data-step="3">
+          <div class="grid cols-2">
+            <div class="field"><label>Tempat</label><div id="dd-tempat"></div></div>
+            <div class="field"><label>Tanggal Kegiatan</label><input class="input" id="f-tgl" type="date"></div>
+            <div class="field"><label>Jam Mulai</label><input class="input" id="f-mulai" type="time"></div>
+            <div class="field"><label>Jam Selesai</label><input class="input" id="f-selesai" type="time"></div>
+          </div>
+          <p class="hint" id="jadwal-hint">Tanggal dan jam akan menyesuaikan dengan ketersediaan ruang</p>
+        </div>
+
+        <!-- LANGKAH 4: Upload proposal PDF -->
+        <div class="step-panel" data-step="4">
+          <p class="lbl">Unggah Proposal (Format PDF, sesuai template yg telah diberikan)</p>
+          <label class="dropzone" id="dropzone">
+            <input type="file" id="f-file" accept="application/pdf" hidden>
+            <span id="dz-text">Seret file, atau klik untuk unggah</span>
+          </label>
+        </div>
+
+        <!-- LANGKAH 5: Konfirmasi -->
+        <div class="step-panel" data-step="5">
+          <p class="lbl">Konfirmasi Pengajuan</p>
+          <div class="confirm-box" id="confirm-box"></div>
+        </div>
+
+        <div class="step-actions">
+          <button class="btn btn-ghost" id="btn-back">&lt; Kembali</button>
+          <button class="btn" id="btn-next">Lanjut &gt;</button>
+        </div>
+      </div>
+
+      <div id="riwayat">
+        <h2 class="section-title">Riwayat Peminjaman Tempat</h2>
+        <div class="card"><table class="table" id="tbl-riwayat"></table></div>
+      </div>
+    </section>
+  </div>
+
+  <script src="../assets/js/auth.js"></script>
+  <script src="../assets/js/ui.js"></script>
+  <script src="../assets/js/shell.js"></script>
+  <script src="../assets/js/data.js"></script>
+  <script src="../assets/js/dasboard-mahasiswa.js"></script>
+
+  <script>
+    // Riwayat hanya tampil di langkah 1 (Unduh Template)
+    (function () {
+      const wizard = document.getElementById('wizard');
+      const riwayat = document.getElementById('riwayat');
+      if (!wizard || !riwayat) return;
+
+      function update() {
+        const step1 = wizard.querySelector('.step-panel[data-step="1"]');
+        const onStep1 = step1 && getComputedStyle(step1).display !== 'none';
+        riwayat.style.display = onStep1 ? '' : 'none';
+      }
+
+      new MutationObserver(update).observe(wizard, {
+        attributes: true, subtree: true, childList: true
+      });
+      wizard.addEventListener('click', () => setTimeout(update, 0));
+      update();
+    })();
+  </script>
+</body>
+</html>
